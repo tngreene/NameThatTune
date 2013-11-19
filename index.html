@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<head>
+	<title>Name That Tune! | by Ted Greene, Sarah Federman, and Ed Finer</title>
+	<!-- METADATA -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- BLUEPRINT -->
+	<link rel="stylesheet" type="text/css" href="css/blueprint/screen.css" media="screen, projection">
+	<link rel="stylesheet" type="text/css" href="css/blueprint/print.css" media="print">
+		<!--LIQUID GRID BlUEPRINT PLUGIN-->
+		<!-- <link rel="stylesheet" type="text/css" href="css/blueprint/liquid.css"> -->
+	<!--[if lt IE 8]>
+	  <link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection">
+	<![endif]-->
+
+	<!-- MY STYLES -->
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+
+	<!-- SCRIPTS -->
+	<script src="main.js" type="text/javascript"></script>
+    <!--<script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>-->
+	<script>
+		window.onload = init;
+	</script>
+	
+</head>
+
+<body>
+
+
+	<!--This will turn into the (hidden) youtube video
+    <div id="player"></div>-->
+	<div class="container">
+		<header>
+			<h1 class="prepend-top">Name That Tune</h1>
+				<nav>
+				<form class="span-24" id="nav">
+					<!--GENRE DROPDOWN-->
+						<span class="span-4">
+                           	<select name="genre">
+								<option value="rock">Rock</option>
+								<option value="hits">Today's Billboard Hits</option>
+								<option value="country">Country</option>
+							</select>
+						</span>
+						<!--DIFFICULTY RADIO BUTTONS-->
+						<span class="span-8 prepend-3" id="difficulty">
+							<p class="span-2"><strong>Difficulty:</strong></p>
+							<input type="radio"  name="difficultyE" value="Easy" onclick="changeDifficulty()"/>Easy
+							<input type="radio" name="difficultyM" value="Medium" onclick="changeDifficulty()"/>Medium
+							<input type="radio" name="difficultyH" value="Hard" onclick="changeDifficulty()"/>Hard
+						</span>
+		
+						<!--SUBMIT BUTTON-->
+						<span class="span-8 last">
+							<input type="submit" value="Ready, Set, GO!" id="start">
+						</span>
+						<!--SUBMIT BUTTON-->
+						<!--<span class="span-8 last">
+							<input type="button" value="Pause/Play" id="start" onclick="pausePlay()">
+						</span>-->
+				</form>
+				</nav>
+		</header>
+
+		<div class="content">
+			<!--MAIN COLUMN-->
+			<div class="span-15" id="main">
+			<section class="span-15 prepend-top border">
+				<!--SONG PLAYER-->
+				<div class="span-15 box"> 
+					<!--The solution to me sucking at Web Development-->
+                            <audio autoplay controls src="audio/null.mp3" id="audioControls"/>
+							<!--<se0lect name="genre" id="genre" onchange="getPlaylist()">
+								<option value="beatles">The Beatles</option>
+								<option value="daftpunk">Daft Punk</option>
+								<option value="megadeath">MegaDeth</option>
+							</select>--></div>
+				<!--SUBNAV-->
+				<span class="span-15" id="sub-nav">
+					<a href="#" class="span-4 prepend-1">Buy this Song</a>
+					<a href="#" class="span-4">Restart Game</a>
+					<a href="#" class="span-6 last">End Game</a>
+				</span>	
+				<!--TRIVIA-->
+				<div class="span-15 prepend-top">
+					<h2>What is the name of this song's artist?</h2>
+					<div class="prepend-1" id="triviaGroup">
+						<input type="radio" name="trivia" value="option_1" onclick="checkAnswer()"/><br>
+						<input type="radio" name="trivia" value="option_2" onclick="checkAnswer()"/><br>
+						<input type="radio" name="trivia" value="option_3" onclick="checkAnswer()"/><br>
+						<input type="button" value="SUBMIT" class="prepend-top" onclick="checkAnswer()">
+					</div>
+				</div>
+			</section>
+			</div>
+
+			<!--SIDE COLUMN-->
+			<aside class="span-8 prepend-top last">
+				<h2>Highscores</h2>
+				<hr>
+				<ol>
+					<li>Sarah Federman - 2mil</li>
+					<li>Ed Finer - 250</lI>
+					<li>Ted Greene - 0</li>
+				</ol>
+
+
+					<h2>Your Score:</h2>
+					<h3><span id="playerScore"></span> points</h3>
+					<br>
+
+					<h3>Your Highscore:<span id="playerHigh"></span></h3>
+
+			</aside>
+		</div><!-- END CONTENT-->
+
+		<footer class="span-24">
+			<p class="span-8 push-8">&copy; 2013 Ted Greene, Sarah Federman, Ed Finer</p>
+		</footer>
+	</div> <!-- END CONTAINER -->
+</body>
+</html>
