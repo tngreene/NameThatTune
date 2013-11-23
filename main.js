@@ -1,7 +1,5 @@
-//AIzaSyCWTuWAhcjt5JU6Mz2WB5epmc--yw6oTGQ browser key
-var API_KEY;
+"use strict";
 //Game Variables
-
 //Number of player lives, starts at 3
 var lives;
 var score;
@@ -126,7 +124,7 @@ function updateScore()
 function init()
 {
     //initilize various base values
-    lives = 3;
+    /*lives = 3;
     score = 0;
 
 	    highscore = score;
@@ -150,116 +148,35 @@ function init()
     scoresIndex = 0;
 
     updateSong();
-    updateScore();
+    updateScore();*/
 }
 
-    //togglePlayButton = true;
-//--Google code---------
-// 2. This code loads the IFrame Player API code asynchronously.
-   /* var tag = document.createElement('script');
+function gotoITunes()
+{
+	//See this //https://www.apple.com/itunes/affiliates/resources/documentation/itunes-store-web-service-search-api.html#searching
 
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-//----------------------//
-    //Youtube API stuff-----
-    //API_KEY = 'AIzaSyCWTuWAhcjt5JU6Mz2WB5epmc--yw6oTGQ';
-    //gapi.client.setApiKey(API_KEY);
-    //gapi.client.load('youtube',3,getPlaylist());
-//--------------------------*/
+    //jQuery.support.cors = true;
+	//Parameters for the search
+	//The search parameters
+	var term = "daft+punk+human+after+all";//Filled in with the actual song playing
+	var country = "US";
+	var media = "music";
+	var entity = "musicTrack";
+	var attribute = "mixTerm";
+	var callback = "jsonLoaded";//Callback function for bringing the json back
+	var limit = 1; //Limit of search results (if it can't find the right one within 3 then there's no hope.) This may be useless
+    var url = "https://itunes.apple.com/search?"+"term="+term+"&country="+country+"&media="+media+"&entity="+entity+"&callback="+callback+"&limit="+limit;
+	console.log($);
+	console.log(jQuery);
+	$.getJSON(url).done(function(data){jsonLoaded(data);});
 
+	window.open(url);
+}
 
-/*
- // Google code: Creates an <iframe> (and YouTube player)
- //    after the API code downloads.
- var player;
- function onYouTubeIframeAPIReady() {
- player = new YT.Player('player', {
- height: '390',
- width: '800',
- videoId: 'CB1aKGy-dRU',
- playerVars: {
- autoplay: 1,
- controls: 1,
- showinfo:1,
- playlist:
- ['CB1aKGy-dRU', 'IOmazuzCXCg',
- 'SJmmaIGiGBg', 's1tAYmMjLdY]' ] /*, '9G6H2tQCaOA',
- 'FVBnkOL-8Jw', 'xajQUEPXRyg', '1FlQCtg96SQ',
- 'wtS4ef0vqhU', 'w5wuHaJ9qZw', 'gNyHymEhZmg',
- '4mjGsdF3k1s', 'QA34CtKaJBI', '7ohaMarNbKs',
- '0714IbwC3HA', '20jzMqD-N2c', 'x9_vhYpR9xo',
- 'fGIOd1mPJZ0', 'BVQU6xH96k8']
- },
- events: {
- 'onReady': onPlayerReady,
- 'onStateChange':changeState
- }
- });
- }
-
- function onPlayerReady(event) {
- //event.target.playVideo();
- //Turn the music up
- event.target.setVolume(0);
- }
- //End of google code
-
- function changeState(e)
- {
-
- }
- function getPlaylist()
- {
- console.log("GetPlaylist");
- var select = document.querySelector("#genre");
-
- /*switch(select.selectedIndex)
- {
- case 0:
- // var request = gapi.client.youtube.playlist.list();
- player.load
- {'listType': 'playlist',
- 'list': 'PL13865942465515B2',
- 'index': '0',
- 'startSeconds': '0',
- 'suggestedQuality': 'default'}
- );
-
- break;
- case 1:
- player.loadloadPlaylist(
- {'listType': 'playlist',
- 'list': 'PL9A1600EA18716662',
- 'index': '0',
- 'startSeconds': '0',
- 'suggestedQuality': 'default'}
- );
- break;
- case 2:
- player.loadloadPlaylist(
- {'listType': 'playlist',
- 'list': 'PLD5E09FE1EF4CCA45',
- 'index': '0',
- 'startSeconds': '0',
- 'suggestedQuality': 'default'}
- );
- break;
- }
- function pausePlay()
- {
- console.log("HIt paused");
-
- //If it is playing
- var status = player.getPlayerState();
- //console
- if(status != 2)
- {
- player.pauseVideo();
- }
- else
- {
- player.playVideo();
- }
- }
- }*/
+//Handles the results
+function jsonLoaded(obj){
+	console.log(obj);
+    var x = 0;
+    x = x+1;
+    console.log(x);
+}

@@ -15,10 +15,12 @@
 
 	<!-- MY STYLES -->
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
-
+    <!-- Import jQuery -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<!-- SCRIPTS -->
 	<script src="main.js" type="text/javascript"></script>
-    <!--<script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>-->
+
+    <!--<script type="text/javascript" src="itunes_code.js"></script>-->
 	<script>
 		window.onload = init;
 	</script>
@@ -78,7 +80,7 @@
 							</select>--></div>
 				<!--SUBNAV-->
 				<span class="span-15" id="sub-nav">
-					<a href="#" class="span-4 prepend-1">Buy this Song</a>
+					<a href="#" class="span-4 prepend-1" onclick="gotoITunes()">Buy this Song</a>
 					<a href="#" class="span-4">Restart Game</a>
 					<a href="#" class="span-6 last">End Game</a>
 				</span>	
