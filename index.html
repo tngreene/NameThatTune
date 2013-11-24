@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html>
 <head>
 	<title>Name That Tune! | by Ted Greene, Sarah Federman, and Ed Finer</title>
 	<!-- METADATA -->
@@ -47,7 +48,7 @@
 						</span>
 						<!--DIFFICULTY RADIO BUTTONS-->
 						<span class="span-8 prepend-3" id="difficulty">
-							<p class="span-2"><strong>Difficulty:</strong></p>
+							<div class="span-2"><strong>Difficulty:</strong></div>
 							<input type="radio"  name="difficultyE" value="Easy" onclick="changeDifficulty()"/>Easy
 							<input type="radio" name="difficultyM" value="Medium" onclick="changeDifficulty()"/>Medium
 							<input type="radio" name="difficultyH" value="Hard" onclick="changeDifficulty()"/>Hard
@@ -72,7 +73,7 @@
 				<!--SONG PLAYER-->
 				<div class="span-15 box"> 
 					<!--The solution to me sucking at Web Development-->
-                            <audio autoplay controls src="audio/null.mp3" id="audioControls"/>
+                            <!--<audio autoplay controls src="audio/null.mp3" id="audioControls"/>-->
 							<!--<se0lect name="genre" id="genre" onchange="getPlaylist()">
 								<option value="beatles">The Beatles</option>
 								<option value="daftpunk">Daft Punk</option>

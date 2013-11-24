@@ -1,5 +1,5 @@
 "use strict";
-//Game Variables
+/*//Game Variables
 //Number of player lives, starts at 3
 var lives;
 var score;
@@ -119,10 +119,11 @@ function updateScore()
     //Set the innter html of those selectors
     document.querySelector("#playerScore").innerHTML = score;
     document.querySelector("#playerHigh").innerHTML = highscore;
-}
+}*/
 //Initilizes the game
 function init()
 {
+var x = 0;
     //initilize various base values
     /*lives = 3;
     score = 0;
@@ -131,52 +132,47 @@ function init()
 
     difficulty = "easy";
 
-    songs = [
-        {name: "Believe", artist:"The Bravery"},
-        {name: "Achilles Last Stand", artist: "Led Zepplin"},
-        {name: "Invaders Must Die", artist: "The Prodigy"},
-        {name: "Night On Disco Mountain", artist:"David Shire"},
-        {name: "Going Mobile", artist:"The Who"}
-    ];
-    songIndex = 0;
-
-    scores = [
-        {name: "Sarah", score:"2,000,000"},
-        {name: "Ed", score:"750"},
-        {name: "Ted", score:"0"}
-    ];
-    scoresIndex = 0;
-
-    updateSong();
-    updateScore();*/
+ */
 }
 
+//Goes to the itunes page to find the store
 function gotoITunes()
 {
 	//See this //https://www.apple.com/itunes/affiliates/resources/documentation/itunes-store-web-service-search-api.html#searching
 
-    //jQuery.support.cors = true;
 	//Parameters for the search
-	//The search parameters
 	var term = "daft+punk+human+after+all";//Filled in with the actual song playing
 	var country = "US";
 	var media = "music";
 	var entity = "musicTrack";
 	var attribute = "mixTerm";
-	var callback = "jsonLoaded";//Callback function for bringing the json back
-	var limit = 1; //Limit of search results (if it can't find the right one within 3 then there's no hope.) This may be useless
+	var callback = "?";//Callback function for bringing the json back. MUST BE "?"!!!!!!!
+	var limit = 1; //Limit of search results to the first possible one
+	
+	//THIS IS WORKING!!!!
+	//var url = "https://itunes.apple.com/search?term=jim+jones&country=ca&callback=?";
+	
+	//This also works!!!!
     var url = "https://itunes.apple.com/search?"+"term="+term+"&country="+country+"&media="+media+"&entity="+entity+"&callback="+callback+"&limit="+limit;
-	console.log($);
-	console.log(jQuery);
-	$.getJSON(url).done(function(data){jsonLoaded(data);});
-
-	window.open(url);
+	
+	//Uses get json to find the data from there and calls jsonLoaded
+	//$.getJSON(url,{dataType:"jsonp"}).done(function(data){jsonLoaded(data);});
+	$.getJSON(url,{dataType:"jsonp"}).done(
+												function(data)
+												{
+													//var itunesLink = data.results[0].trackViewUrl;
+													window.open(data.results[0].trackViewUrl, "_blank");
+													//jsonLoaded(data);
+												}
+											);
 }
 
 //Handles the results
 function jsonLoaded(obj){
-	console.log(obj);
-    var x = 0;
-    x = x+1;
-    console.log(x);
+	//For testing the obj returned
+	//console.log(obj);
+	//console.log(obj.results[0].trackViewUrl);
+	//The final link to get to the track view
+	var itunesLink = obj.results[0].trackViewUrl;
+	window.open(itunesLink, "_blank");
 }
