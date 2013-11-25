@@ -1,76 +1,63 @@
 "use strict";
-/*//Game Variables
+
+//Game Variables
 //Number of player lives, starts at 3
 var lives;
 var score;
 var highscore;
 
-//gets values from buttons
-var difficulty;
-
-//has the play button been pressed or not
-//True means play, false means paused
-var togglePlayButton;
-
-//An array of songs
-var songs;
-var songIndex;//index of that array
-
-//An array of scores
-var scores;
-//An index for the scores
-var scoresIndex;
-
-//Changes the difficulty level
-function changeDifficulty(events) {
-   // event.target
-
-   //Gets the colection of bettons
-   var buttonCollection = document.querySelector("#difficulty");
-   for(var i=0; i < buttonCollection.childElementCount; i++)
-   {
-       //If they are a button and not something else
-        if(buttonCollection.childNodes[i].value != null)
-        {
-            //set the value of difficulty
-            difficulty = buttonCollection.childNodes[i].value;
-        }
-   }
-}
-
-//Restarts the game
-function restartGame()
+var API_KEY = "AIzaSyCWTuWAhcjt5JU6Mz2WB5epmc--yw6oTGQ";
+var curArtist;
+var curSong;
+// 3. This function creates an <iframe> (and YouTube player)
+//    after the API code downloads.
+var player;
+function onYouTubeIframeAPIReady()
 {
-    //Saves the highscore
-	var saveHigh = highscore;
-    init();//resets everything else
-	highscore = saveHigh;//reverst the highscore
-    updateScore();//updates the display
+	player = new YT.Player('player', 
+							{
+								height: '390',
+								width: '640',
+								videoId: 'M7lc1UVf-VE',
+								playerVs:
+								{
+									autoplay:1,
+									controls:0,
+									enablejsapi:1 //imporant!				
+								},
+								events: 
+								{
+									'onReady': onPlayerReady,
+									'onStateChange': onPlayerStateChange
+								}
+							}
+						);
 }
-
-function endGame()
+// 4. The API will call this function when the video player is ready.
+function onPlayerReady(event)
 {
-    //commit scores
+	var ranNo = Math.floor(Math.random() * 10);
+	console.log(ranNo);
+	//load a playlist into it
+	event.target.loadPlaylist({list:"PL8EC5F5F8B35525F6",
+								listType:"playlist",
+								index:ranNo
+								});
+	curArtist =
+	curSong =
+	event.target.playVideo();
 }
 
-function buySong()
+// 5. The API calls this function when the player's state changes.
+//    The function indicates that when playing a video (state=1),
+//    the player should play for six seconds and then stop.
+function onPlayerStateChange(event)
 {
 
 }
 
-function updateSong()
-{
-    //Get the audio controls element
-    var audioControls = document.querySelector("#audioControls");
-
-    //Set the src material to the songs array
-    audioControls.setAttribute("src","audio/"+songs[songIndex].name + ".mp3");
-	
-	//Update the trivia bubbles
-	var triviaGroup = document.querySelector("#triviaGroup");
-	triviaGroup.childNodes[1].setAttribute("value", songs[songIndex].artist);
-	triviaGroup.childNodes[4].setAttribute("value", songs[(songIndex % 5 )+1].artist);
-	triviaGroup.childNodes[7].setAttribute("value", songs[(songIndex % 5 )+2].artist);
+function stopVideo() {
+	player.stopVideo();
 }
 
 function checkAnswer()
@@ -119,20 +106,17 @@ function updateScore()
     //Set the innter html of those selectors
     document.querySelector("#playerScore").innerHTML = score;
     document.querySelector("#playerHigh").innerHTML = highscore;
-}*/
-//Initilizes the game
+}
+	  
 function init()
 {
-var x = 0;
-    //initilize various base values
-    /*lives = 3;
-    score = 0;
+// 2. This code loads the IFrame Player API code asynchronously.
+  var tag = document.createElement('script');
 
-	    highscore = score;
-
-    difficulty = "easy";
-
- */
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  getArtist();
 }
 
 //Goes to the itunes page to find the store
@@ -166,7 +150,17 @@ function gotoITunes()
 												}
 											);
 }
-
+function getArtist()
+{
+	var genreSelect = document.querySelector("#genre");
+	console.log(genreSelect);
+	console.log(genreSelect.options);
+	var curGenre = genreSelect.options[genreSelect.options.selectedIndex];
+	console.log(curGenre);
+	switch(curGenre)
+	{
+	}
+}
 //Handles the results
 function jsonLoaded(obj){
 	//For testing the obj returned

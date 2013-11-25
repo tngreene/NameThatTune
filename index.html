@@ -29,10 +29,7 @@
 </head>
 
 <body>
-
-
-	<!--This will turn into the (hidden) youtube video
-    <div id="player"></div>-->
+	<!--This will turn into the (hidden) youtube video-->
 	<div class="container">
 		<header>
 			<h1 class="prepend-top">Name That Tune</h1>
@@ -40,10 +37,12 @@
 				<form class="span-24" id="nav">
 					<!--GENRE DROPDOWN-->
 						<span class="span-4">
-                           	<select name="genre">
+                           	<select id="genre" name="genre">
 								<option value="rock">Rock</option>
-								<option value="hits">Today's Billboard Hits</option>
+								<option value="hits">Modern Pop</option>
 								<option value="country">Country</option>
+								<option value="metal">Classic Metal</option>
+								<option value="electronic">Daft Punk</option>
 							</select>
 						</span>
 						<!--DIFFICULTY RADIO BUTTONS-->
@@ -122,5 +121,6 @@
 			<p class="span-8 push-8">&copy; 2013 Ted Greene, Sarah Federman, Ed Finer</p>
 		</footer>
 	</div> <!-- END CONTAINER -->
+	<div id="player"></div>
 </body>
 </html>
