@@ -2,7 +2,7 @@
 
 //Game Variables
 //Number of player lives, starts at 3
-var lives;
+var attempts;
 var score;
 var highscore;
 
@@ -89,10 +89,10 @@ function checkAnswer()
     else//otherwise
     {
         //subtract the ifes
-        lives--;
+        attempts--;
 
         //if you have run out of lives
-        if(lives <= 0)
+        if(attempts <= 0)
         {
             //REstart the game
             restartGame();
@@ -100,12 +100,72 @@ function checkAnswer()
     }
 }
 
-//U[date the score
-function updateScore()
-{
-    //Set the innter html of those selectors
+// Update the player's current score and the high score (if necessary)
+function updateScore() {
+    // Update the text of the #playerScore field
     document.querySelector("#playerScore").innerHTML = score;
-    document.querySelector("#playerHigh").innerHTML = highscore;
+	
+	// If the player has set a new high score, update #playerHigh
+	if( score >= highScore )
+	{
+		document.querySelector("#playerHigh").innerHTML = highscore;
+	}
+}
+
+// HIGH SCORE COOKIE CREATION - MAY NOT WORK
+// Follows w3schools JS Cookie tutorial: w3schools.com/js/js_cookies.asp
+function saveHighScore(cName, value, lifeTime) {
+		var expiration = new Date();
+		
+		expiration.setDate(expireation.getDate() + lifeTime);
+		
+		var cValue = escape(value) + 
+		( (lifeTime == null) ? "" : "; expires = " + expiration.toUTCString() );
+		
+		document.cookie = cName + "=" + cValue;
+		
+}
+
+function loadHighScore(cName) {
+	var cValue = document.cookie;
+	var cStart = cValue.indexOf(" " + cName + "=");
+	
+	if (cStart == -1) {
+		cStart = cValue.indexOf(cName + "=");
+	}
+	
+	if (cStart == -1) {
+		cValue = null;
+	}
+		
+	else {
+		cStart = cValue.indexOf("=", cStart) + 1;
+		var cEnd = cValue.indexOf(";", cStart);
+		
+		if (cEnd == -1) {
+			cEnd = cValue.length;
+		}
+		
+		cValue = unescape(cValue.substring(cStart, cEnd);
+	}
+	
+	return cValue;
+}
+
+function checkHighScore() {
+	var cookieScore = loadHighScore("weeklyHigh");
+	
+	if (cookieScore != null && cookieScore != "") { highScore = cookieScore; }
+	else { highscore = 0; }
+}
+
+function endGame() {
+	saveHighScore(weeklyHigh, highScore, 7);
+}
+
+function restartGame() {
+	init(); // reset all values in code
+	updateScore(); // update the displayed values
 }
 	  
 function init()
@@ -117,6 +177,12 @@ function init()
   var firstScriptTag = document.getElementsByTagName('script')[0];
   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
   getArtist();
+  
+	attempts = 3;
+	score = 0;
+	difficulty = "easy";
+	// The value of highScore comes from the checkHighScore()
+	checkHighScore();
 }
 
 //Goes to the itunes page to find the store
